@@ -48,7 +48,15 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
     return (
         <>
             <Paper elevation={3} sx={{ padding: '20px' }}>
-                <Tabs value={fundValue} onChange={handleFundChange} aria-label="Tabs that show the fund options">
+                <Tabs value={fundValue}
+                    onChange={handleFundChange}
+                    scrollButtons
+                    allowScrollButtonsMobile
+                    variant="scrollable"
+                    aria-label="Tabs that show the fund options"
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                >
                     {funds.map((fund, index) => (
                         <Tab label={fund.data.quote.name} key={index} />
                     ))}
@@ -56,15 +64,20 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
 
                 {funds.map((fund, index) => (
                     <CustomTabPanel value={fundValue} index={index} key={index}>
-                        <Grid container>
+                        <Grid container className={styles.fundsTab}>
                             <Grid size={{ xs: 12, md: 8 }}>
-                                <Typography className={styles.fundsTab__text}>{fund.data.profile.objective}</Typography>
+                                <Box className={styles.fundsTab__text}>
+                                    <Typography>{fund.data.profile.objective}</Typography>
+                                </Box>
                             </Grid>
                             <Grid size={{ xs: 12, md: 4 }}>
-                                <Typography component="legend">Rating</Typography>
-                                <Rating name="read-only" value={fund.data.ratings.analystRating} readOnly />
+                                <Box className={`${styles.fundsTab__ratings}-container`}>
 
-                                <Box sx={{ width: '100%', textAlign: 'right', paddingBottom: '20px' }}>
+                                    <Typography component="legend">Rating</Typography>
+                                    <Rating name="read-only" value={fund.data.ratings.analystRating} readOnly className={styles.fundsTab__ratings} />
+                                </Box>
+                                <Box className={styles.fundsTab__buttonGroup}>
+                                    <Typography variant="h6">Documents</Typography>
                                     <ButtonGroup
                                         orientation="vertical"
                                         aria-label="Vertical button group"
@@ -79,8 +92,9 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
 
                                 {!!fund.data.ratings.SRRI && (
                                     <>
+                                        <Typography variant="h6">Fund Rating</Typography>
+
                                         <Gauge
-                                            width={300}
                                             height={100}
                                             value={fund.data.ratings.SRRI}
                                             startAngle={-90} endAngle={90}
@@ -99,7 +113,7 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
                                                 },
                                             })} />
 
-                                        <Box sx={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                                        <Box className={styles.fundsTab__gauge__labels}>
                                             <Typography component="legend">Less Risk</Typography>
                                             <Typography component="legend">More Risk</Typography>
                                         </Box>
@@ -107,8 +121,10 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
                                 )}
 
                             </Grid>
-                            <Grid size={12}>
-                                <Box sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center', width: '100%' }}>
+                            <Grid size={{ xs: 12, md: 6 }}>
+
+                                <Typography variant="h6">Fund Asset Allocation</Typography>
+                                <Box className={styles.fundsTab__pieChart}>
                                     <PieChart
                                         colors={['pink', 'yellow', 'orange', 'green', 'lightblue']}
                                         series={[
@@ -122,8 +138,8 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
                                 </Box>
                             </Grid>
 
-                            <Grid size={{xs: 12, md: 6}}>
-                                <Typography component="h2" className={styles.funds__header}>Top 10 Holdings</Typography>
+                            <Grid size={{ xs: 12, md: 6 }}>
+                                <Typography variant="h6" className={styles.funds__header}>Top 10 Holdings</Typography>
                                 <Box key={index}>
                                     <DataGrid
                                         getRowId={(row) => row.name}

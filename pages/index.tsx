@@ -11,9 +11,6 @@ import CustomTabPanel from 'src/components/customTabPanel';
 
 import styles from '../styles/funds.module.scss';
 
-export const metadata = {
-    title: "AJ Bell Test",
-};
 interface PageProps {
     cautious: FundData;
     balanced: FundData;
@@ -41,7 +38,12 @@ const Page = ({ cautious, balanced, adventurous, responsible }: PageProps) => {
                 <Box className={styles.funds}>
                     <Grid container spacing={2}>
 
-                        <Tabs value={strategyValue} onChange={handleStrategyChange} aria-label="Tabs that show the fund options">
+                        <Tabs 
+                            value={strategyValue} 
+                            onChange={handleStrategyChange} 
+                            aria-label="Tabs that show the fund options"
+                            centered
+                            >
                             <Tab label="Growth Funds Variations" />
                             <Tab label="Responsible Growth Fund" key={1} />
                         </Tabs>
