@@ -47,7 +47,7 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
 
     return (
         <>
-            <Paper elevation={3} sx={{ padding: '20px' }}>
+            <Paper elevation={3} className={styles.fundsTab}>
                 <Tabs value={fundValue}
                     onChange={handleFundChange}
                     scrollButtons
@@ -134,6 +134,7 @@ const FundTabs = ({ funds, buttons }: FundTabsProps) => {
                                         ]}
                                         width={400}
                                         height={200}
+                                        data-testid={'pie-chart'}
                                     />
                                 </Box>
                             </Grid>

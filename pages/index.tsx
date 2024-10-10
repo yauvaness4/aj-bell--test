@@ -34,7 +34,7 @@ const Page = ({ cautious, balanced, adventurous, responsible }: PageProps) => {
 
     return (
         <>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" component={'section'}>
                 <Box className={styles.funds}>
                     <Grid container spacing={2}>
 
@@ -59,7 +59,7 @@ const Page = ({ cautious, balanced, adventurous, responsible }: PageProps) => {
     )
 }
 
-const fetchFundData = async (url: string) => {
+export const fetchFundData = async (url: string) => {
     const res = await fetch(url);
     const data = await res.json();
     return data;

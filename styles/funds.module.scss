@@ -44,6 +44,9 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 24px;
+            @media screen and (min-width: 768px) {
+                margin-top: 24px;
+            }
         }
 
         &__gauge__labels {
